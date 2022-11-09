@@ -27,7 +27,7 @@ class AppBD:
                 INSERT INTO Produto (codigo, Nome, Preco, PrecoAcrescido) VALUES (%s,%s,%s,%s)
             """
             codigo = int(codigo)
-            preco = float(preco)
+            preco = float(f'{preco}'.replace(',','.'))
             precoAcrescido = float(f'{calc_acrescimo(preco, self.acrescimo)}')
             cursor.execute(postgres_insert_query, (codigo, nome, preco, precoAcrescido))
             self.connection.commit()
@@ -87,7 +87,7 @@ class AppBD:
                 WHERE codigo = %s
             """
             codigo = int(codigo)
-            preco = float(preco)
+            preco = float(f"{preco}".replace(",","."))
             precoAcrescido = float(f'{calc_acrescimo(preco, self.acrescimo)}')
             cursor.execute(sql_update_query, (nome, preco, precoAcrescido, codigo))
             self.connection.commit()
